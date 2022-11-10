@@ -6,14 +6,14 @@ const myArray = [1, 10, 3, 6, 'ArrayElement'];
  */
 
 console.log(`3: ${myArray[2]}`);
-console.log(`6: ${myArray[3]}`);
+console.log(`6: ${myArray.at(3)}`);
 
 /**
  *  2. Log type of each element
  */
 
 myArray.forEach((elem) => {
-  console.log(elem);
+  console.log(typeof elem);
 });
 
 /**
@@ -54,7 +54,7 @@ console.log({
  * Should return another Array
  */
 
-const multiplied = myArray.map((elem) => (typeof elem === 'number' ? elem * 2 : elem));
+const multiplied = myArray.filter((elem) => typeof elem === 'number').map((elem) => elem * 2);
 
 console.log({
   multiplied,

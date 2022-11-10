@@ -11,7 +11,7 @@ const invoice = {
  */
 
 console.log(`First name: ${invoice.firstName}`);
-console.log(`Last name: ${invoice.lastName}`);
+console.log(`Last name: ${invoice['lastName']}`);
 
 /**
  * 2. Log Object Keys
