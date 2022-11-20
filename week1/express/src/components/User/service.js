@@ -8,6 +8,10 @@ function findById(id) {
     return UserModel.findById(id).exec();
 }
 
+function findByEmail(email) {
+    return UserModel.findOne({ email }).exec();
+}
+
 function create(profile) {
     return UserModel.create(profile);
 }
@@ -23,6 +27,7 @@ function deleteById(_id) {
 module.exports = {
     findAll,
     findById,
+    findByEmail,
     create,
     updateById,
     deleteById,
