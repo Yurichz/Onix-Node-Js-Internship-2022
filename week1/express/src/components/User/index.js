@@ -1,11 +1,8 @@
 const bcrypt = require('bcryptjs');
 const UserService = require('./service');
 const UserValidation = require('./validation');
+const handleOk = require('../../filters/handleOk');
 const ValidationError = require('../../error/ValidationError');
-
-const handleOk = (res, user) => res.status(200).json({
-    data: user,
-});
 
 const findAllUsers = async (req, res, next) => {
     try {
@@ -25,7 +22,7 @@ const findUserById = async (req, res, next) => {
             throw new ValidationError(error.details);
         }
 
-        const user = await UserService.findById(req.body.id);
+        const user = await UserService.findById(req.params.id);
 
         return handleOk(res, user);
     } catch (err) {

@@ -5,4 +5,4 @@ const connectOptions = {
     useUnifiedTopology: true,
 };
 
-module.exports = mongoose.createConnection('mongodb://localhost:27016/internship', connectOptions);
+module.exports = mongoose.createConnection(process.env.MONGO_URL, connectOptions);
