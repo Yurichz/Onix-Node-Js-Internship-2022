@@ -38,17 +38,11 @@ const createUser = async (req, res, next) => {
             throw new ValidationError(error.details);
         }
 
-        const { password } = req.body;
+        req.body.password = await UserService.hashPassword(req.body.password, next);
 
-        await bcrypt.genSalt(7, async (e, salt) => bcrypt
-            .hash(password, salt, async (err, hash) => {
-                if (err) throw err;
+        const user = await UserService.create(req.body);
 
-                req.body.password = hash;
-                const user = await UserService.create(req.body);
-
-                return handleOk(res, user);
-            }));
+        return handleOk(res, user);
     } catch (err) {
         return next(err);
     }
@@ -61,6 +55,8 @@ const updateUserById = async (req, res, next) => {
         if (error) {
             throw new ValidationError(error.details);
         }
+
+        req.body.password = await UserService.hashPassword(req.body.password, next);
 
         const user = await UserService.updateById(req.body.id, req.body);
 

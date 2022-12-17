@@ -1,4 +1,5 @@
 const UserModel = require('./model');
+const bcrypt = require('bcryptjs');
 
 function findAll() {
     return UserModel.find({}).exec();
@@ -24,6 +25,17 @@ function deleteById(_id) {
     return UserModel.deleteOne({ _id }).exec();
 }
 
+async function hashPassword(password, next) {
+    try {
+        const salt = await bcrypt.genSalt(7);
+        const hashedPassword = await bcrypt.hash(password, salt);
+
+        return hashedPassword;
+    } catch (error) {
+        next(error);
+    }
+}
+
 module.exports = {
     findAll,
     findById,
@@ -31,4 +43,5 @@ module.exports = {
     create,
     updateById,
     deleteById,
+    hashPassword,
 };
