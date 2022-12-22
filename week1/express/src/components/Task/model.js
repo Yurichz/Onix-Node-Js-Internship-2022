@@ -1,10 +1,10 @@
-const { Schema } = require('mongoose');
+const { Schema, Types } = require('mongoose');
 const connections = require('../../config/connection');
 
 const TaskSchema = new Schema(
     {
-        userId: {
-            type: String,
+        assignee: {
+            type: Types.ObjectId,
             required: true,
         },
         title: {
@@ -18,6 +18,14 @@ const TaskSchema = new Schema(
         isComplete: {
             type: Boolean,
             default: false,
+        },
+        estimatedTime: {
+            type: Number,
+            required: true,
+        },
+        createdBy: {
+            type: Types.ObjectId,
+            required: true,
         },
         expiredAt: {
             type: Date,

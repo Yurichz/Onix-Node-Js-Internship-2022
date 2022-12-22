@@ -1,24 +1,27 @@
 const { Router } = require('express');
 const {
-    findAllTasks,
     findTaskById,
     findTaskByUserId,
+    getTasksByPage,
     createTask,
+    patchTaskById,
     updateTaskById,
     deleteTaskById,
 } = require('./index');
 
 const router = Router();
 
-router.get('/', findAllTasks);
-
-router.get('/my-tasks', findTaskByUserId);
+router.get('/all', findTaskByUserId);
 
 router.get('/:id', findTaskById);
+
+router.get('/', getTasksByPage);
 
 router.post('/', createTask);
 
 router.put('/', updateTaskById);
+
+router.patch('/:id', patchTaskById);
 
 router.delete('/', deleteTaskById);
 

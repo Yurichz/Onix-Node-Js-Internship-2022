@@ -17,6 +17,14 @@ class TaskValidation extends Validation {
             .required()
             .validate(data);
     }
+
+    getTasksByPage(data) {
+        return this.Joi
+            .number()
+            .required()
+            .validate(data);
+    }
+
     create(data) {
         return this.Joi
             .object({
@@ -30,6 +38,9 @@ class TaskValidation extends Validation {
                     .min(6)
                     .max(48)
                     .required(),
+                estimatedTime: this.Joi
+                    .number()
+                    .required(),
                 expiredAt: this.Joi
                     .date()
                     .required(),
@@ -37,7 +48,7 @@ class TaskValidation extends Validation {
             .validate(data);
     }
 
-    updateById(data) {
+    patchById(data) {
         return this.Joi
             .object({
                 id: this.Joi
@@ -53,6 +64,37 @@ class TaskValidation extends Validation {
                     .max(48),
                 isComplete: this.Joi
                     .boolean(),
+                estimatedTime: this.Joi
+                    .number()
+                    .required(),
+                expiredAt: this.Joi
+                    .date(),
+            })
+            .validate(data);
+    }
+
+    updateById(data) {
+        return this.Joi
+            .object({
+                id: this.Joi
+                    .objectId()
+                    .required(),
+                title: this.Joi
+                    .string()
+                    .min(2)
+                    .max(255)
+                    .required(),
+                description: this.Joi
+                    .string()
+                    .min(6)
+                    .max(48)
+                    .required(),
+                isComplete: this.Joi
+                    .boolean()
+                    .required(),
+                estimatedTime: this.Joi
+                    .number()
+                    .required(),
                 expiredAt: this.Joi
                     .date(),
             })
