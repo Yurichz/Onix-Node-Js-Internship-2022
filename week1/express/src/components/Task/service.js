@@ -1,6 +1,5 @@
 const { Types } = require('mongoose');
 const TaskModel = require('./model');
-const UserModel = require('../User/model');
 const { limitTasks } = require('./constants');
 
 
@@ -9,31 +8,36 @@ function findById(id) {
 }
 
 function findTaskByUserId(userId) {
-    return UserModel.aggregate([
+    return TaskModel.aggregate([
         {
-            $match: {
-                _id: Types.ObjectId(userId),
+            $facet: {
+                tasks: [{
+                    $match: {
+                        assignee: Types.ObjectId(userId),
+                    },
+                }],
             },
         },
         {
             $lookup: {
-                from: 'taskmodels',
-                localField: '_id',
-                foreignField: 'assignee',
-                as: 'tasks',
+                from: 'usermodels',
+                localField: 'tasks.assignee',
+                foreignField: '_id',
+                as: 'user',
             },
+        },
+        {
+            $unwind: '$user',
         },
         {
             $addFields: {
                 name: {
-                    $concat: ['$firstName', ' ', '$lastName'],
+                    $concat: ['$user.firstName', ' ', '$user.lastName'],
                 },
             },
         },
         {
-            $unwind: {
-                path: '$tasks',
-            },
+            $unwind: '$tasks',
         },
         {
             $group: {
@@ -49,13 +53,6 @@ function findTaskByUserId(userId) {
         {
             $project: {
                 _id: 0,
-                firstName: 0,
-                lastName: 0,
-                email: 0,
-                password: 0,
-                createdAt: 0,
-                updatedAt: 0,
-                __v: 0,
             },
         },
     ]);
