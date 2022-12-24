@@ -40,6 +40,11 @@ function findTaskByUserId(userId) {
             $unwind: '$tasks',
         },
         {
+            $sort: {
+                'tasks.estimatedTime': -1,
+            },
+        },
+        {
             $group: {
                 _id: null,
                 tasks: {
