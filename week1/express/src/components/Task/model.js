@@ -15,10 +15,6 @@ const TaskSchema = new Schema(
             type: String,
             required: true,
         },
-        isComplete: {
-            type: Boolean,
-            default: false,
-        },
         estimatedTime: {
             type: Number,
             required: true,

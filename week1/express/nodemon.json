@@ -1,4 +1,4 @@
 {
-    "watch": ["src"],
+    "watch": ["src", "swagger.json"],
     "exec": "node ./src/server/index.js"
 }

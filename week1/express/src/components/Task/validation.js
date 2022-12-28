@@ -62,8 +62,6 @@ class TaskValidation extends Validation {
                     .string()
                     .min(6)
                     .max(48),
-                isComplete: this.Joi
-                    .boolean(),
                 estimatedTime: this.Joi
                     .number()
                     .required(),
@@ -88,9 +86,6 @@ class TaskValidation extends Validation {
                     .string()
                     .min(6)
                     .max(48)
-                    .required(),
-                isComplete: this.Joi
-                    .boolean()
                     .required(),
                 estimatedTime: this.Joi
                     .number()

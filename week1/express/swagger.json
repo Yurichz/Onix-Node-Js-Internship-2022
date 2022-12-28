@@ -1,0 +1,448 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Onix Internship",
+        "description": "REST API swagger documentation",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "localhost:3000",
+    "basePath": "/v1",
+    "tags": [
+        {
+            "name": "Demo",
+            "description": "Demo description"
+        },
+        {
+            "name": "User",
+            "description": "Operation with user"
+        },
+        {
+            "name": "Task",
+            "description": "Operation with task"
+        }
+    ],
+    "paths": {
+        "/demo": {
+            "get": {
+                "tags": ["Demo"],
+                "summary": "Demo path",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Demo"
+                        }
+                    }
+                }
+            }
+        },
+        "/user": {
+            "get": {
+                "tags": ["User"],
+                "summary": "Get all users",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/User"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": ["User"],
+                "summary": "Create user",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "User that we want to create",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ValidationError"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": ["User"],
+                "summary": "Update user",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "body",
+                        "description": "User that we want to update",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ValidationError"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["User"],
+                "summary": "Delete user",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "body",
+                        "description": "User id that we want to delete",
+                        "schema": {
+                            "properties": {
+                                "id": {
+                                    "type": "string",
+                                    "format": "ObjectId"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "properties": {
+                                "acknowledged": {
+                                    "type": "boolean"
+                                },
+                                "deletedCount": {
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ValidationError"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/:id": {
+            "get": {
+                "tags": ["User"],
+                "summary": "Get user",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ValidationError"
+                        }
+                    }
+                }
+            }
+        },
+        "/task": {
+            "post": {
+                "tags": ["Task"],
+                "summary": "Create task",
+                "parameters": [
+                    {
+                        "name": "task",
+                        "in": "body",
+                        "description": "Task that we want to create",
+                        "schema": {
+                            "$ref": "#/definitions/Task"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Task"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ValidationError"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": ["Task"],
+                "summary": "Update task",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "body",
+                        "description": "Task that we want to update",
+                        "schema": {
+                            "$ref": "#/definitions/Task"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Task"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ValidationError"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["Task"],
+                "summary": "Delete task",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "body",
+                        "description": "Task id that we want to delete",
+                        "schema": {
+                            "properties": {
+                                "id": {
+                                    "type": "string",
+                                    "format": "ObjectId"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Task"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ValidationError"
+                        }
+                    }
+                }
+            }
+        },
+        "/task?page=": {
+            "get": {
+                "tags": ["Task"],
+                "summary": "Get tasks by page",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "type": "number",
+                        "in": "query",
+                        "description": "Page what we want to show"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "properties": {
+                                "tasks": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Task"
+                                    }
+                                },
+                                "totalTasks": {
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ValidationError"
+                        }
+                    }
+                }
+            }
+        },
+        "/task/all": {
+            "get": {
+                "tags": ["Task"],
+                "summary": "Get all tasks for user",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "properties": {
+                                "tasks": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Task"
+                                    }
+                                },
+                                "name": {
+                                    "type": "string"
+                                },
+                                "totalTasks": {
+                                    "type": "integer"
+                                },
+                                "totalEstimation": {
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/task/:id": {
+            "get": {
+                "tags": ["Task"],
+                "summary": "Get task",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Task"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": ["Task"],
+                "summary": "Patch task",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "body",
+                        "description": "Task that we want to update",
+                        "schema": {
+                            "properties": {
+                                "estimatedTime": {
+                                    "type": "number"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ValidationError"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Demo": {
+            "properties": {
+                "testProperty": {
+                    "type": "string"
+                }
+            }
+        },
+        "User": {
+            "required": ["firstName", "lastName", "email", "password"],
+            "properties": {
+                "firstName": {
+                    "type": "string"
+                },
+                "lastName": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "Task": {
+            "required": ["title", "description", "estimatedTime", "expiredAt"],
+            "properties": {
+                "assignee": {
+                    "type": "string",
+                    "format": "ObjectId"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "estimatedTime": {
+                    "type": "integer"
+                },
+                "createdBy": {
+                    "type": "string",
+                    "format": "ObjectId"
+                },
+                "expiredAt": {
+                    "type": "string",
+                    "format": "Date",
+                    "description": "Date to deleting task"
+                }
+            }
+        },
+        "ValidationError": {
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "details": {
+                    "type": "object"
+                }
+            }
+        }
+    },
+    "schemes": ["http"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"]
+}

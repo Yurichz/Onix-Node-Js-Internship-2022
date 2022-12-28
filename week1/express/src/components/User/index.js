@@ -1,4 +1,3 @@
-const bcrypt = require('bcryptjs');
 const UserService = require('./service');
 const UserValidation = require('./validation');
 const handleOk = require('../../filters/handleOk');
@@ -74,7 +73,7 @@ const deleteUserById = async (req, res, next) => {
             throw new ValidationError(error.details);
         }
 
-        const user = await UserService.deleteById(req.body);
+        const user = await UserService.deleteById(req.body.id);
 
         return handleOk(res, user);
     } catch (err) {
